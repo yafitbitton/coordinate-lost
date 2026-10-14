@@ -3,10 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coordinate Lost</title>
-<meta name="google-site-verification" content="Y00uTq3hrEYYtsUAbtA55ggjbw6GHZIh-2TEjFUtIuM" />
-  <!-- מניעת זיהוי אוטומטי של מספרים כמספרי טלפון/קישורים ב-iOS ובאייפד (מבטל את הקו התחתון) -->
+  <title>Coordinate Lost — Yafit Bitton</title>
+  
+  <!-- אימות הבעלות שלך מול גוגל -->
+  <meta name="google-site-verification" content="Y00uTq3hrEYYtsUAbtA55ggjbw6GHZIh-2TEjFUtIuM" />
+
+  <!-- מניעת זיהוי אוטומטי של מספרים כמספרי טלפון באייפד/iOS -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+
+  <!-- מטא-דאטה מאחורי הקלעים למנועי חיפוש -->
+  <meta name="description" content="Coordinate Lost is an ongoing time-based conceptual artwork and digital counter by artist Yafit Bitton.">
+  <meta name="author" content="Yafit Bitton">
+  <link rel="canonical" href="https://coordinate-lost.com/">
+
+  <!-- נתונים סמנטיים מאחורי הקלעים (גוגל קורא, הצופה לא רואה) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VisualArtwork",
+    "name": "Coordinate Lost",
+    "artform": "Time-based digital installation",
+    "artMedium": "Custom software, digital countdown",
+    "genre": "Conceptual Art",
+    "url": "https://coordinate-lost.com/",
+    "creator": {
+      "@type": "Person",
+      "name": "Yafit Bitton",
+      "jobTitle": "Artist",
+      "url": "https://yafitbitton.com/",
+      "sameAs": [
+        "https://yafitbitton.com/"
+      ]
+    }
+  }
+  </script>
 
   <!-- ייבוא הפונט IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,12 +70,9 @@
       font-weight: 400;
       letter-spacing: 0.12em;
       font-variant-numeric: tabular-nums;
-      
-      /* ביטול קו תחתון או הדגשות של אפל/ספארי */
       text-decoration: none !important;
       border-bottom: none !important;
       outline: none !important;
-      
       user-select: none;
       -webkit-user-select: none;
       -webkit-touch-callout: none;
@@ -53,7 +80,6 @@
       opacity: 0.9;
     }
 
-    /* דריסה למקרה שספארי באייפד מייצר תגית קישור פנימית */
     #counter a {
       color: inherit !important;
       text-decoration: none !important;
@@ -63,6 +89,7 @@
 </head>
 <body>
 
+  <!-- על המסך קיים רק המספר הזה - שום דבר נוסף -->
   <div id="counter">1791963000</div>
 
   <script>
