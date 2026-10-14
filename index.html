@@ -1,65 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>coordinate: lost</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coordinate Lost</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    html, body {
-      width: 100vw;
-      height: 100vh;
+    body {
       background-color: #000000;
       color: #ffffff;
-      overflow: hidden;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      cursor: none;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+      overflow: hidden;
     }
-    #counter {
-      font-family: ui-monospace, 'Courier New', Menlo, Monaco, monospace;
-      font-weight: 400;
-      text-align: center;
-      white-space: nowrap;
-      user-select: none;
-      font-size: clamp(26px, 8.5vw, 110px);
-      letter-spacing: clamp(2px, 0.8vw, 8px);
-      line-height: 1;
+    .timer-display {
+      font-size: clamp(2.5rem, 8vw, 6.5rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
       font-variant-numeric: tabular-nums;
+      user-select: none;
     }
   </style>
 </head>
-<body onclick="toggleFullScreen()">
+<body>
 
-  <div id="counter">504599400</div>
+  <div id="counter" class="timer-display">1791963000</div>
 
   <script>
-    const BASE_1985_SECONDS = 504599400;
-    const START_TIME_MS = 1795069800000;
+    // נקודת התחלה: 10:30:00 (14 באוקטובר 2026)
+    const START_VALUE = 1791963000;
+    // נקודת יעד סופית
+    const TARGET_VALUE = 504599400;
 
-    const counterElement = document.getElementById('counter');
+    const counterElement = document.getElementById("counter");
 
-    function updateCounter() {
-      const now = Date.now();
-      const elapsedSeconds = Math.floor((now - START_TIME_MS) / 1000);
-      counterElement.textContent = BASE_1985_SECONDS - elapsedSeconds;
-    }
+    function update() {
+      const now = Math.floor(Date.now() / 1000);
 
-    updateCounter();
-    setInterval(updateCounter, 1000);
+      if (now < START_VALUE) {
+        counterElement.textContent = START_VALUE;
+        return;
+      }
 
-    function toggleFullScreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
+      const elapsed = now - START_VALUE;
+      const currentValue = START_VALUE - elapsed;
+
+      if (currentValue <= TARGET_VALUE) {
+        counterElement.textContent = TARGET_VALUE;
       } else {
-        document.exitFullscreen().catch(() => {});
+        counterElement.textContent = currentValue;
       }
     }
+
+    update();
+    setInterval(update, 1000);
   </script>
+
 </body>
 </html>
