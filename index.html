@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coordinate Lost</title>
   
-  <!-- ייבוא פונטים של מכונת כתיבה ודפוס ישן -->
+  <!-- מניעה מוחלטת מאפל לזהות את המספרים כמספר טלפון / קישור -->
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
+
+  <!-- ייבוא הפונט Special Elite -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=block" rel="stylesheet">
 
   <style>
     * {
@@ -17,24 +20,35 @@
       padding: 0;
     }
     body {
-      background-color: #0d0d0d; /* שחור עמוק מאוד, מעט פחות "דיגיטלי" משחור מוחלט */
-      color: #e0e0e0; /* לבן-מלוכלך/שנהב עדין המדמה דיו או נייר ישן, פחות זוהר מלבן טהור */
+      background-color: #0d0d0d;
+      color: #e0e0e0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Special Elite', 'Courier New', Courier, serif;
+      font-family: 'Special Elite', monospace;
       overflow: hidden;
       cursor: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
-    #counter {
+
+    #counter, #counter * {
+      font-family: 'Special Elite', monospace !important;
       font-size: clamp(2.2rem, 7.5vw, 6rem);
       font-weight: 400;
-      letter-spacing: 0.12em; /* ריווח אופייני להדפסות מכניות */
+      letter-spacing: 0.12em;
       font-variant-numeric: tabular-nums;
-      user-select: none;
       
-      /* אפקטים עדינים לשיפור מראה הדפוס הידני */
+      /* ביטול מוחלט של קווים תחתיים ועיצוב קישורים אוטומטי של אפל */
+      text-decoration: none !important;
+      border-bottom: none !important;
+      outline: none !important;
+      color: inherit !important;
+      
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
       text-shadow: 0 0 1px rgba(255,255,255,0.1); 
       opacity: 0.9;
     }
@@ -71,9 +85,8 @@
     update();
     setInterval(update, 1000);
 
-    // לחיצה בכל מקום מעבירה למסך מלא
     document.addEventListener("click", () => {
-      if (!document.fullscreenElement) {
+      if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {});
       }
     });
