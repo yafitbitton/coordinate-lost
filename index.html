@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coordinate Lost</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -13,18 +18,17 @@
     body {
       background-color: #000000;
       color: #ffffff;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+      font-family: 'Space Mono', monospace;
       overflow: hidden;
+      cursor: none;
     }
-    .timer-display {
+    #counter {
       font-size: clamp(2.5rem, 8vw, 6.5rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       font-variant-numeric: tabular-nums;
       user-select: none;
     }
@@ -32,36 +36,46 @@
 </head>
 <body>
 
-  <div id="counter" class="timer-display">1791963000</div>
+  <div id="counter">1791963000</div>
 
   <script>
-    // נקודת התחלה: 10:30:00 (14 באוקטובר 2026)
-    const START_VALUE = 1791963000;
-    // נקודת יעד סופית
+    // נקודת פתיחה: 14 באוקטובר 2026, 10:30:00 (שעון ישראל)
+    const START_EPOCH = 1791963000; 
+    // נקודת היעד בעבר
     const TARGET_VALUE = 504599400;
 
-    const counterElement = document.getElementById("counter");
+    const el = document.getElementById("counter");
 
     function update() {
       const now = Math.floor(Date.now() / 1000);
 
-      if (now < START_VALUE) {
-        counterElement.textContent = START_VALUE;
+      if (now < START_EPOCH) {
+        el.textContent = START_EPOCH;
         return;
       }
 
-      const elapsed = now - START_VALUE;
-      const currentValue = START_VALUE - elapsed;
+      // הזמן שחלף בעולם האמיתי מאז 10:30
+      const elapsed = now - START_EPOCH;
+      
+      // תנועה אחורה בזמן מנקודת הפתיחה לעבר נקודת היעד
+      const current = START_EPOCH - elapsed;
 
-      if (currentValue <= TARGET_VALUE) {
-        counterElement.textContent = TARGET_VALUE;
+      if (current <= TARGET_VALUE) {
+        el.textContent = TARGET_VALUE;
       } else {
-        counterElement.textContent = currentValue;
+        el.textContent = current;
       }
     }
 
     update();
     setInterval(update, 1000);
+
+    // לחיצה בכל מקום מעבירה למסך מלא ומעלימה את שורת ה-URL
+    document.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+    });
   </script>
 
 </body>
