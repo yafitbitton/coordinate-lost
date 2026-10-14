@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coordinate Lost</title>
   
-  <!-- מניעה מוחלטת מאפל לזהות את המספרים כמספר טלפון / קישור -->
+  <!-- מניעת זיהוי אוטומטי של מספרים כמספרי טלפון/קישורים ב-iOS ובאייפד (מבטל את הקו התחתון) -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 
-  <!-- ייבוא הפונט Special Elite -->
+  <!-- ייבוא הפונט IBM Plex Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=block" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -19,6 +19,7 @@
       margin: 0;
       padding: 0;
     }
+
     body {
       background-color: #0d0d0d;
       color: #e0e0e0;
@@ -26,31 +27,37 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Special Elite', monospace;
+      font-family: 'IBM Plex Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
       overflow: hidden;
       cursor: none;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    #counter, #counter * {
-      font-family: 'Special Elite', monospace !important;
+    #counter {
+      font-family: 'IBM Plex Mono', ui-monospace, Menlo, Monaco, Consolas, monospace !important;
       font-size: clamp(2.2rem, 7.5vw, 6rem);
       font-weight: 400;
       letter-spacing: 0.12em;
       font-variant-numeric: tabular-nums;
       
-      /* ביטול מוחלט של קווים תחתיים ועיצוב קישורים אוטומטי של אפל */
+      /* ביטול קו תחתון או הדגשות של אפל/ספארי */
       text-decoration: none !important;
       border-bottom: none !important;
       outline: none !important;
-      color: inherit !important;
       
       user-select: none;
       -webkit-user-select: none;
       -webkit-touch-callout: none;
-      text-shadow: 0 0 1px rgba(255,255,255,0.1); 
+      text-shadow: 0 0 1px rgba(255, 255, 255, 0.1); 
       opacity: 0.9;
+    }
+
+    /* דריסה למקרה שספארי באייפד מייצר תגית קישור פנימית */
+    #counter a {
+      color: inherit !important;
+      text-decoration: none !important;
+      border: none !important;
     }
   </style>
 </head>
