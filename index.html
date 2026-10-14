@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coordinate Lost</title>
   
+  <!-- ייבוא פונטים של מכונת כתיבה ודפוס ישן -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -16,21 +17,26 @@
       padding: 0;
     }
     body {
-      background-color: #000000;
-      color: #ffffff;
+      background-color: #0d0d0d; /* שחור עמוק מאוד, מעט פחות "דיגיטלי" משחור מוחלט */
+      color: #e0e0e0; /* לבן-מלוכלך/שנהב עדין המדמה דיו או נייר ישן, פחות זוהר מלבן טהור */
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Special Elite', 'Courier New', Courier, serif;
       overflow: hidden;
       cursor: none;
     }
     #counter {
-      font-size: clamp(2.5rem, 8vw, 6.5rem);
-      letter-spacing: 0.12em;
+      font-size: clamp(2.2rem, 7.5vw, 6rem);
+      font-weight: 400;
+      letter-spacing: 0.12em; /* ריווח אופייני להדפסות מכניות */
       font-variant-numeric: tabular-nums;
       user-select: none;
+      
+      /* אפקטים עדינים לשיפור מראה הדפוס הידני */
+      text-shadow: 0 0 1px rgba(255,255,255,0.1); 
+      opacity: 0.9;
     }
   </style>
 </head>
@@ -39,9 +45,7 @@
   <div id="counter">1791963000</div>
 
   <script>
-    // נקודת פתיחה: 14 באוקטובר 2026, 10:30:00 (שעון ישראל)
     const START_EPOCH = 1791963000; 
-    // נקודת היעד בעבר
     const TARGET_VALUE = 504599400;
 
     const el = document.getElementById("counter");
@@ -54,10 +58,7 @@
         return;
       }
 
-      // הזמן שחלף בעולם האמיתי מאז 10:30
       const elapsed = now - START_EPOCH;
-      
-      // תנועה אחורה בזמן מנקודת הפתיחה לעבר נקודת היעד
       const current = START_EPOCH - elapsed;
 
       if (current <= TARGET_VALUE) {
@@ -70,7 +71,7 @@
     update();
     setInterval(update, 1000);
 
-    // לחיצה בכל מקום מעבירה למסך מלא ומעלימה את שורת ה-URL
+    // לחיצה בכל מקום מעבירה למסך מלא
     document.addEventListener("click", () => {
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {});
