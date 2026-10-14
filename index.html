@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>coordinate: lost</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      background-color: #000000;
+      color: #ffffff;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: none;
+    }
+    #counter {
+      font-family: ui-monospace, 'Courier New', Menlo, Monaco, monospace;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      user-select: none;
+      font-size: clamp(26px, 8.5vw, 110px);
+      letter-spacing: clamp(2px, 0.8vw, 8px);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body onclick="toggleFullScreen()">
+
+  <div id="counter">504599400</div>
+
+  <script>
+    const BASE_1985_SECONDS = 504599400;
+    const START_TIME_MS = 1795069800000;
+
+    const counterElement = document.getElementById('counter');
+
+    function updateCounter() {
+      const now = Date.now();
+      const elapsedSeconds = Math.floor((now - START_TIME_MS) / 1000);
+      counterElement.textContent = BASE_1985_SECONDS - elapsedSeconds;
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+  </script>
+</body>
+</html>
