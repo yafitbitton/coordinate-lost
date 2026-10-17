@@ -89,42 +89,4 @@
 </head>
 <body>
 
-  <!-- על המסך קיים רק המספר הזה - שום דבר נוסף -->
-  <div id="counter">1792149660</div>
-
-  <script>
-    const START_EPOCH = 1792149660; 
-    const TARGET_VALUE = 504599400;
-
-    const el = document.getElementById("counter");
-
-    function update() {
-      const now = Math.floor(Date.now() / 1000);
-
-      if (now < START_EPOCH) {
-        el.textContent = START_EPOCH;
-        return;
-      }
-
-      const elapsed = now - START_EPOCH;
-      const current = START_EPOCH - elapsed;
-
-      if (current <= TARGET_VALUE) {
-        el.textContent = TARGET_VALUE;
-      } else {
-        el.textContent = current;
-      }
-    }
-
-    update();
-    setInterval(update, 1000);
-
-    document.addEventListener("click", () => {
-      if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      }
-    });
-  </script>
-
-</body>
-</html>
+  <!-- על המסך קיים רק המספר הזה - שום דבר נוס
